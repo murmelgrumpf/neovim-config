@@ -9,7 +9,7 @@ return {
         config = function()
             require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'lua_ls', 'bashls', 'stylelint_lsp', 'tsserver', 'ember', 'gopls', 'eslint' },
+                ensure_installed = { 'lua_ls', 'bashls', 'jdtls', 'stylelint_lsp', 'tsserver', 'ember', 'gopls', 'eslint' },
             })
         end,
     },
