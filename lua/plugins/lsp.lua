@@ -14,6 +14,14 @@ return {
         end,
     },
     {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        config = function()
+            require('mason-tool-installer').setup({
+                ensure_installed = { 'java-debug-adapter' },
+            })
+        end,
+    },
+    {
         "neovim/nvim-lspconfig",
         config = function()
             vim.diagnostic.config({
