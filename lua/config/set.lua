@@ -24,7 +24,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
@@ -43,5 +43,3 @@ vim.g.focus_event = true
 vim.api.nvim_create_autocmd("FocusGained", { pattern = ("*"), command = "checktime", })
 vim.api.nvim_create_autocmd("CursorHold", { pattern = ("*"), command = "checktime", })
 vim.api.nvim_create_autocmd("FileChangedShell", { pattern = ("*"), command = "checktime", })
-
-
