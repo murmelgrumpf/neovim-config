@@ -2,14 +2,14 @@ return {
     {
         "williamboman/mason.nvim",
         config = function()
+            require('mason').setup({})
         end,
     },
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
-            require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'lua_ls', 'bashls', 'jdtls', 'stylelint_lsp', 'tsserver', 'ember', 'gopls', 'eslint' },
+                ensure_installed = { 'lua_ls', 'bashls', 'jdtls', 'stylelint_lsp', 'tsserver', 'ember', 'gopls', 'cssls', 'css_variables' },
             })
         end,
     },
@@ -55,10 +55,28 @@ return {
 
             lspconfig.stylelint_lsp.setup({
                 capabilities = lsp_capabilities,
+                settings = {
+                    stylelintplus = {
+                        autoFixOnFormat = true,
+                        autoFixOnSave = true,
+                    }
+                },
+            })
+
+            lspconfig.cssls.setup({
+                capabilities = lsp_capabilities,
+            })
+
+            lspconfig.css_variables.setup({
+                capabilities = lsp_capabilities,
             })
 
             lspconfig.tsserver.setup({
                 capabilities = lsp_capabilities,
+                on_init = function(client)
+                    client.server_capabilities.documentFormattingProvider = false
+                    client.server_capabilities.documentFormattingRangeProvider = false
+                end,
             })
 
             lspconfig.ember.setup({
@@ -69,9 +87,6 @@ return {
                 capabilities = lsp_capabilities,
             })
 
-            lspconfig.eslint.setup({
-                capabilities = lsp_capabilities,
-            })
             lspconfig.bashls.setup {
                 capabilities = lsp_capabilities,
                 filetypes = { "sh", "zsh", "bash" },
@@ -88,6 +103,59 @@ return {
             vim.keymap.set("n", "<leader>da", function() vim.lsp.buf.code_action() end)
             vim.keymap.set("n", "<leader>dr", function() vim.lsp.buf.rename() end)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
+        end,
+    },
+    {
+        'nvimtools/none-ls.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+        config = function()
+            local null_ls = require('null-ls')
+
+            null_ls.setup({
+                on_attach = function(client)
+                    if client.server_capabilities.document_formatting then
+                        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+                    end
+                end,
+                debounce = 50,
+                debounce_text_changes = 50,
+                update_in_insert = true,
+                root_dir = require("null-ls.utils").root_pattern(".git", "package.json"),
+            })
+        end,
+    },
+    {
+        'jay-babu/mason-null-ls.nvim',
+        dependencies = {
+            "williamboman/mason.nvim",
+            "nvimtools/none-ls.nvim",
+            "nvimtools/none-ls-extras.nvim",
+        },
+        config = function()
+            local null_ls = require('null-ls')
+
+            local formatting = null_ls.builtins.formatting
+            local diagnostics = null_ls.builtins.diagnostics
+
+            require('mason-null-ls').setup({
+                ensure_installed = { 'eslint_d', 'prettierd' },
+                handlers = {
+                    function() end, -- disables automatic setup of all null-ls sources
+                    eslint_d = function(source_name, methods)
+                        null_ls.register(require("none-ls.formatting.eslint_d"))
+                        null_ls.register(require("none-ls.diagnostics.eslint_d").with({ diagnostic_config = { underline = true, update_in_insert = true } }))
+                    end,
+                    prettierd = function(source_name, methods)
+                        null_ls.register(formatting.prettierd.with({
+                            filetypes = { "handlebars" }
+
+                        }))
+                    end,
+                },
+                automatic_installation = true,
+            })
         end,
     },
     {
