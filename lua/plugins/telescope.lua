@@ -46,6 +46,7 @@ return {
             vim.keymap.set('n', '<leader>ps', function()
                 require("telescope").extensions.live_grep_args.live_grep_args({ path_display = filenameFirst });
             end)
+            require("telescope").load_extension("noice")
 
             -- vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
             -- require("telescope").load_extension("session-lens")
