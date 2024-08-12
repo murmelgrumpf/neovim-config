@@ -99,6 +99,19 @@ local config = {
     init_options = {
         bundles = bundles
     },
+    capabilities = {
+        workspace = {
+            configuration = true,
+        },
+        textDocument = {
+            completion = {
+                completionItem = {
+                    snippentSupport = true,
+                },
+            },
+        },
+    },
 }
 
+config.capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('jdtls').start_or_attach(config)
