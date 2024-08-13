@@ -10,6 +10,10 @@ return {
         },
 
         config = function()
+            require("notify").setup({
+                animate = false,
+                stages = "static",
+            })
             require("noice").setup({
                 lsp = {
                     override = {
