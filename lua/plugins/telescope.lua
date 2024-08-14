@@ -5,6 +5,10 @@ return {
         dependencies = {
             'nvim-lua/plenary.nvim',
             "nvim-telescope/telescope-live-grep-args.nvim",
+            {
+                "isak102/telescope-git-file-history.nvim",
+                dependencies = { "tpope/vim-fugitive" }
+            },
         },
         config = function()
             require("telescope").load_extension("live_grep_args")
@@ -42,7 +46,7 @@ return {
             local builtin = require('telescope.builtin')
 
             vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-            vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+            vim.keymap.set('n', '<C-p>', require("telescope").extensions.git_file_history.git_file_history, {})
             vim.keymap.set('n', '<leader>ps', function()
                 require("telescope").extensions.live_grep_args.live_grep_args({ path_display = filenameFirst });
             end)
