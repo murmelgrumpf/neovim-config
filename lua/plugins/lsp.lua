@@ -9,7 +9,21 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require('mason-lspconfig').setup({
-                ensure_installed = { 'lua_ls', 'bashls', 'jdtls', 'stylelint_lsp', 'tsserver', 'ember', 'gopls', 'cssls', 'css_variables' },
+                ensure_installed = {
+                    'lua_ls',
+                    'bashls',
+                    'jdtls',
+                    'stylelint_lsp',
+                    'tsserver',
+                    'ember',
+                    'gopls',
+                    'cssls',
+                    'css_variables',
+                    'htmx',
+                    'templ',
+                    'html',
+                    'tailwindcss',
+                },
             })
         end,
     },
@@ -77,6 +91,32 @@ return {
 
             lspconfig.css_variables.setup({
                 capabilities = lsp_capabilities,
+            })
+
+            lspconfig.htmx.setup({
+                capabilities = lsp_capabilities,
+                filetypes = { "html", "templ" },
+            })
+
+            lspconfig.templ.setup({
+                capabilities = lsp_capabilities,
+            })
+
+            lspconfig.html.setup({
+                capabilities = lsp_capabilities,
+                filetypes = { "html", "templ" },
+            })
+
+            lspconfig.tailwindcss.setup({
+                capabilities = lsp_capabilities,
+                filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+                settings = {
+                    tailwindCSS = {
+                        includeLanguages = {
+                            templ = "html",
+                        },
+                    },
+                },
             })
 
             lspconfig.tsserver.setup({
