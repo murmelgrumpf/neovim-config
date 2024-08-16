@@ -46,6 +46,7 @@ return {
 
             local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
             local lspconfig = require('lspconfig')
+            lsp_capabilities.textDocument.completion.completionItem.snippetSupport = true;
 
             lspconfig.lua_ls.setup({
                 capabilities = lsp_capabilities,
@@ -93,6 +94,11 @@ return {
                 capabilities = lsp_capabilities,
             })
 
+            lspconfig.html.setup({
+                capabilities = lsp_capabilities,
+                filetypes = { "html", "templ" },
+            })
+
             lspconfig.htmx.setup({
                 capabilities = lsp_capabilities,
                 filetypes = { "html", "templ" },
@@ -102,10 +108,6 @@ return {
                 capabilities = lsp_capabilities,
             })
 
-            lspconfig.html.setup({
-                capabilities = lsp_capabilities,
-                filetypes = { "html", "templ" },
-            })
 
             lspconfig.tailwindcss.setup({
                 capabilities = lsp_capabilities,
