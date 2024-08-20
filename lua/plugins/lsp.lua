@@ -44,9 +44,10 @@ return {
 
             vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
-            local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+            --local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+            local lsp_cabilities = vim.lsp.protocol.make_client_capabilities()
             local lspconfig = require('lspconfig')
-            lsp_capabilities.textDocument.completion.completionItem.snippetSupport = true;
+            --lsp_capabilities.textDocument.completion.completionItem.snippetSupport = true;
 
             lspconfig.lua_ls.setup({
                 capabilities = lsp_capabilities,
@@ -85,7 +86,6 @@ return {
                     }
                 },
             })
-
             lspconfig.cssls.setup({
                 capabilities = lsp_capabilities,
             })
@@ -208,58 +208,58 @@ return {
             })
         end,
     },
-    {
-        'hrsh7th/nvim-cmp',
-        config = function()
-            local cmp = require('cmp')
-            local cmp_select = { behavior = cmp.SelectBehavior.Select }
+    --    {
+    --        'hrsh7th/nvim-cmp',
+    --        config = function()
+    --            local cmp = require('cmp')
+    --            local cmp_select = { behavior = cmp.SelectBehavior.Select }
+    --
+    --            cmp.setup({
+    --                sources = {
+    --                    { name = 'path' },
+    --                    --{ name = 'nvim_lsp' },
+    --                    --{ name = 'nvim_lua' },
+    --                    --{ name = 'luasnip', keyword_length = 2 },
+    --                    { name = 'buffer', keyword_length = 1 },
+    --                },
+    --                mapping = cmp.mapping.preset.insert({
+    --                    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+    --                    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+    --                    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    --                    ['<C-Space>'] = cmp.mapping.complete(),
+    --                }),
+    --            })
+    --
+    -- `/` cmdline setup.
+    --cmp.setup.cmdline('/', {
+    --    mapping = cmp.mapping.preset.cmdline(),
+    --    sources = {
+    --        { name = 'buffer' }
+    --    }
+    --})
 
-            cmp.setup({
-                sources = {
-                    { name = 'path' },
-                    { name = 'nvim_lsp' },
-                    { name = 'nvim_lua' },
-                    { name = 'luasnip', keyword_length = 2 },
-                    { name = 'buffer',  keyword_length = 3 },
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                    ['<C-Space>'] = cmp.mapping.complete(),
-                }),
-            })
-
-            -- `/` cmdline setup.
-            cmp.setup.cmdline('/', {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = 'buffer' }
-                }
-            })
-
-            -- `:` cmdline setup.
-            cmp.setup.cmdline(':', {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = 'path' }
-                }, {
-                    {
-                        name = 'cmdline',
-                        option = {
-                            ignore_cmds = { 'Man', '!' }
-                        }
-                    }
-                })
-            })
-        end,
-    },
-    { 'hrsh7th/cmp-buffer' },
-    { 'hrsh7th/cmp-path' },
-    { 'hrsh7th/cmp-nvim-lua' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/cmp-cmdline' },
-    { 'L3MON4D3/LuaSnip' },
-    { 'rafamadriz/friendly-snippets' },
-    { 'saadparwaiz1/cmp_luasnip' },
+    ---- `:` cmdline setup.
+    --cmp.setup.cmdline(':', {
+    --    mapping = cmp.mapping.preset.cmdline(),
+    --    sources = cmp.config.sources({
+    --        { name = 'path' }
+    --    }, {
+    --        {
+    --            name = 'cmdline',
+    --            option = {
+    --                ignore_cmds = { 'Man', '!' }
+    --            }
+    --        }
+    --    })
+    --})
+    --end,
+    --},
+    --{ 'hrsh7th/cmp-buffer' },
+    --{ 'hrsh7th/cmp-path' },
+    --{ 'hrsh7th/cmp-nvim-lua' },
+    --{ 'hrsh7th/cmp-nvim-lsp' },
+    --{ 'hrsh7th/cmp-cmdline' },
+    --{ 'L3MON4D3/LuaSnip' },
+    --{ 'rafamadriz/friendly-snippets' },
+    --{ 'saadparwaiz1/cmp_luasnip' },
 }

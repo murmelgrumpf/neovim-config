@@ -6,7 +6,7 @@ return {
             "MunifTanjim/nui.nvim",
             "nvim-notify",
             "rcarriga/nvim-notify",
-            "hrsh7th/nvim-cmp",
+            --"hrsh7th/nvim-cmp",
         },
 
         config = function()
@@ -19,7 +19,7 @@ return {
                     override = {
                         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                         ["vim.lsp.util.stylize_markdown"] = true,
-                        ["cmp.entry.get_documentation"] = true,
+                        --           ["cmp.entry.get_documentation"] = true,
                     },
                 },
                 -- you can enable a preset for easier configuration

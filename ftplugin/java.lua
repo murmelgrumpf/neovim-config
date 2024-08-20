@@ -103,15 +103,16 @@ local config = {
         workspace = {
             configuration = true,
         },
-        textDocument = {
-            completion = {
-                completionItem = {
-                    snippentSupport = true,
-                },
-            },
-        },
+        --       textDocument = {
+        --          completion = {
+        --              completionItem = {
+        --                  snippentSupport = true,
+        --              },
+        --          },
+        --      },
     },
 }
 
-config.capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+--config.capabilities = require("cmp_nvim_lsp").default_capabilities(
+config.capabilities = vim.lsp.protocol.make_client_capabilities()
 require('jdtls').start_or_attach(config)
