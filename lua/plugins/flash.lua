@@ -11,7 +11,14 @@ return {
         },
         config = function()
             require("flash").setup({
-                {
+                label = {
+                    rainbow = {
+                        enabled = true,
+                        -- number between 1 and 9
+                        shade = 9,
+                    },
+                },
+                modes = {
                     search = {
                         enabled = true,
                     }
