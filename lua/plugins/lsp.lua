@@ -92,6 +92,10 @@ return {
 
             lspconfig.css_variables.setup({
                 capabilities = lsp_capabilities,
+                embeddedLanguages = {
+                    css = true,
+                    javascript = true
+                },
             })
 
             lspconfig.html.setup({
@@ -106,19 +110,6 @@ return {
 
             lspconfig.templ.setup({
                 capabilities = lsp_capabilities,
-            })
-
-
-            lspconfig.tailwindcss.setup({
-                capabilities = lsp_capabilities,
-                filetypes = { "templ", "astro", "javascript", "typescript", "react" },
-                settings = {
-                    tailwindCSS = {
-                        includeLanguages = {
-                            templ = "html",
-                        },
-                    },
-                },
             })
 
             lspconfig.tsserver.setup({
