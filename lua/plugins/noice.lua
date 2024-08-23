@@ -6,6 +6,7 @@ return {
             "MunifTanjim/nui.nvim",
             "nvim-notify",
             "rcarriga/nvim-notify",
+            'stevearc/dressing.nvim',
             --"hrsh7th/nvim-cmp",
         },
 
