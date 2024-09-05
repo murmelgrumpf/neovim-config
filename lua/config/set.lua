@@ -43,3 +43,5 @@ vim.g.focus_event = true
 vim.api.nvim_create_autocmd("FocusGained", { pattern = ("*"), command = "checktime", })
 vim.api.nvim_create_autocmd("CursorHold", { pattern = ("*"), command = "checktime", })
 vim.api.nvim_create_autocmd("FileChangedShell", { pattern = ("*"), command = "checktime", })
+
+vim.opt.listchars = "eol:$,tab:>-,trail:~,extends:>,precedes:<,space:␣"
