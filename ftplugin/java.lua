@@ -2,32 +2,32 @@ local workspaceDir = vim.fn.stdpath('data') ..
     '/jdtls' .. vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1])
 
 
-local java_debug_path = require('mason-registry')
-    .get_package('java-debug-adapter')
-    :get_install_path()
+-- local java_debug_path = require('mason-registry')
+--     .get_package('java-debug-adapter')
+--     :get_install_path()
 
 local jdtls_path = require('mason-registry')
     .get_package('jdtls')
     :get_install_path()
 
-local java_debug_bundle = vim.split(
-    vim.fn.glob(java_debug_path .. '/extension/server/com.microsoft.java.debug.plugin-*.jar'),
-    '\n'
-)
+-- local java_debug_bundle = vim.split(
+--     vim.fn.glob(java_debug_path .. '/extension/server/com.microsoft.java.debug.plugin-*.jar'),
+--     '\n'
+-- )
 
 local bundles = {}
 
-if java_debug_bundle[1] ~= '' then
-    vim.list_extend(bundles, java_debug_bundle)
-end
-
-local function enable_debugger(bufnr)
-    require('jdtls').setup_dap({ hotcodereplace = 'auto' })
-    require('jdtls.dap').setup_dap_main_class_configs()
-end
+-- if java_debug_bundle[1] ~= '' then
+--     vim.list_extend(bundles, java_debug_bundle)
+-- end
+--
+-- local function enable_debugger(bufnr)
+--     require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+--     require('jdtls.dap').setup_dap_main_class_configs()
+-- end
 
 local function jdtls_on_attach(client, bufnr)
-    enable_debugger(bufnr)
+    -- enable_debugger(bufnr)
 
     -- The following mappings are based on the suggested usage of nvim-jdtls
     -- https://github.com/mfussenegger/nvim-jdtls#usage
@@ -70,6 +70,20 @@ local config = {
             project = {
                 sourcePaths = { "target/generated-sources/annotations" }
             },
+            cleanup = {
+                actionsOnSave = {
+                    'qualifyMembers',
+                    'qualifyStaticMembers',
+                    'addOverride',
+                    'addDeprecated',
+                    'stringConcatToTextBlock',
+                    'invertEquals',
+                    'addFinalModifier',
+                    'instanceofPatternMatch',
+                    'lambdaExpression',
+                    'switchExpression'
+                }
+            },
             format = {
                 settings = {
                     url = "./eclipse-formatter.xml",
@@ -84,6 +98,9 @@ local config = {
             },
             references = {
                 includeDecompiledSources = true,
+            },
+            saveActions = {
+                organizeImports = true,
             },
             extendedClientCapabilities = require('jdtls').extendedClientCapabilities,
         },
