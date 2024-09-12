@@ -48,7 +48,11 @@ return {
             vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
             vim.keymap.set('n', '<C-p>', require("telescope").extensions.git_file_history.git_file_history, {})
             vim.keymap.set('n', '<leader>ps', function()
-                require("telescope").extensions.live_grep_args.live_grep_args({ path_display = filenameFirst });
+                require("telescope").extensions.live_grep_args.live_grep_args({
+                    additional_args = { '--max-filesize', '1G' },
+                    path_display =
+                        filenameFirst
+                });
             end)
             require("telescope").load_extension("noice")
 
