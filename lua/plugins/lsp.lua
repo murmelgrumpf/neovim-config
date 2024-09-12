@@ -14,7 +14,6 @@ return {
                     'bashls',
                     'jdtls',
                     'stylelint_lsp',
-                    'tsserver',
                     'ember',
                     'gopls',
                     'cssls',
@@ -85,6 +84,7 @@ return {
                         autoFixOnSave = true,
                     }
                 },
+                filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss" }
             })
             lspconfig.cssls.setup({
                 capabilities = lsp_capabilities,
@@ -191,7 +191,6 @@ return {
                     prettierd = function(source_name, methods)
                         null_ls.register(formatting.prettierd.with({
                             filetypes = { "handlebars" }
-
                         }))
                     end,
                 },
