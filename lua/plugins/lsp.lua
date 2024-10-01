@@ -20,7 +20,6 @@ return {
                     'css_variables',
                     'htmx',
                     'templ',
-                    'html',
                     'tailwindcss',
                     'yamlls',
                 },
@@ -97,11 +96,6 @@ return {
                     css = true,
                     javascript = true
                 },
-            })
-
-            lspconfig.html.setup({
-                capabilities = lsp_capabilities,
-                filetypes = { "html", "templ" },
             })
 
             lspconfig.htmx.setup({
