@@ -22,6 +22,7 @@ return {
                     'templ',
                     'html',
                     'tailwindcss',
+                    'yamlls',
                 },
             })
         end,
@@ -133,6 +134,21 @@ return {
                 filetypes = { "sh", "zsh", "bash" },
             }
 
+            lspconfig.yamlls.setup({
+                capabilities = lsp_capabilities,
+                settings = {
+                    redhat = {
+                        telemetry = {
+                            enabled = false
+                        },
+                    },
+                    yaml = {
+                        format = {
+                            enabled = true,
+                        },
+                    },
+                }
+            })
 
             vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end)
             vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end)
