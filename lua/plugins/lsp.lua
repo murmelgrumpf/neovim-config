@@ -103,6 +103,7 @@ return {
                 filetypes = { "html", "templ" },
             })
 
+            vim.env.TEMPL_EXPERIMENT = "rawgo"
             lspconfig.templ.setup({
                 capabilities = lsp_capabilities,
             })
