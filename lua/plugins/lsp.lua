@@ -20,7 +20,6 @@ return {
                     'css_variables',
                     'htmx',
                     'templ',
-                    'tailwindcss',
                     'yamlls',
                 },
             })
