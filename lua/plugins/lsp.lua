@@ -196,7 +196,7 @@ return {
                     function() end, -- disables automatic setup of all null-ls sources
                     eslint_d = function(source_name, methods)
                         null_ls.register(require("none-ls.formatting.eslint_d"))
-                        null_ls.register(require("none-ls.diagnostics.eslint_d").with({ diagnostic_config = { underline = true, update_in_insert = true } }))
+                        null_ls.register(require("none-ls.diagnostics.eslint_d").with({ debounce = 250, diagnostic_config = { underline = true, update_in_insert = true } }))
                     end,
                     prettierd = function(source_name, methods)
                         null_ls.register(formatting.prettierd.with({
