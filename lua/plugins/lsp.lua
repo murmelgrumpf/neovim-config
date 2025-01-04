@@ -21,6 +21,8 @@ return {
                     'htmx',
                     'templ',
                     'yamlls',
+                    'biome',
+                    'eslint'
                 },
             })
         end,
@@ -36,6 +38,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
+            local pathName = vim.api.nvim_buf_get_name(0)
             vim.diagnostic.config({
                 update_in_insert = true,
             })
@@ -96,18 +99,24 @@ return {
                     javascript = true
                 },
             })
+            --
+            --            lspconfig.htmx.setup({
+            --                capabilities = lsp_capabilities,
+            --                filetypes = { "html", "templ" },
+            --            })
 
-            lspconfig.htmx.setup({
-                capabilities = lsp_capabilities,
-                filetypes = { "html", "templ" },
-            })
+            if pathName:match("holistic") then
+                lspconfig.biome.setup({
+                    capabilities = lsp_capabilities,
+                })
+            end
 
             vim.env.TEMPL_EXPERIMENT = "rawgo"
             lspconfig.templ.setup({
                 capabilities = lsp_capabilities,
             })
 
-            lspconfig.tsserver.setup({
+            lspconfig.ts_ls.setup({
                 capabilities = lsp_capabilities,
                 on_init = function(client)
                     client.server_capabilities.documentFormattingProvider = false
@@ -115,9 +124,11 @@ return {
                 end,
             })
 
-            lspconfig.ember.setup({
-                capabilities = lsp_capabilities,
-            })
+            if pathName:match("aprenia") then
+                lspconfig.ember.setup({
+                    capabilities = lsp_capabilities,
+                })
+            end
 
             lspconfig.gopls.setup({
                 capabilities = lsp_capabilities,
@@ -174,6 +185,9 @@ return {
                 debounce_text_changes = 50,
                 update_in_insert = true,
                 root_dir = require("null-ls.utils").root_pattern(".git", "package.json"),
+                --should_attach = function(bufnr)
+                --  return vim.api.nvim_buf_get_name(bufnr):match("aprenia")
+                --end,
             })
         end,
     },
