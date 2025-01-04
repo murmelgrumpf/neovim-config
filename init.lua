@@ -4,5 +4,6 @@ require("config.set")
 require("config.commands")
 require("config.aprenia")
 require("config.holistic")
+require("config.edit-code-block")
 
 vim.diagnostic.config({ source = true, update_in_insert = true })
