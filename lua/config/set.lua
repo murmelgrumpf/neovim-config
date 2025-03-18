@@ -45,3 +45,5 @@ vim.api.nvim_create_autocmd("CursorHold", { pattern = ("*"), command = "checktim
 vim.api.nvim_create_autocmd("FileChangedShell", { pattern = ("*"), command = "checktime", })
 
 vim.opt.listchars = "eol:$,tab:>-,trail:~,extends:>,precedes:<,space:␣"
+
+vim.lsp.buf.format({ timeout_ms = 20000 })
