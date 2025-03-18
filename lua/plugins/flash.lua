@@ -20,7 +20,7 @@ return {
                 },
                 modes = {
                     search = {
-                        enabled = true,
+                        enabled = false,
                     }
                 }
             })
