@@ -164,6 +164,9 @@ return {
             vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end)
             vim.keymap.set("n", "<leader>da", function() vim.lsp.buf.code_action() end)
             vim.keymap.set("n", "<leader>dr", function() vim.lsp.buf.rename() end)
+            vim.keymap.set("n", "<leader>dm", function()
+                vim.cmd("lua vim.lsp.buf.code_action { context = { only = {'refactor'} }}")
+            end)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
         end,
     },
@@ -181,6 +184,7 @@ return {
                         vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
                     end
                 end,
+                debug = true,
                 debounce = 50,
                 debounce_text_changes = 50,
                 update_in_insert = true,
