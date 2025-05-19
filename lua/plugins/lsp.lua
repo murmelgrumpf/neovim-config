@@ -1,12 +1,14 @@
 return {
     {
         "williamboman/mason.nvim",
+        version = "1.11.0",
         config = function()
             require('mason').setup({})
         end,
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        version = "1.32.0",
         config = function()
             require('mason-lspconfig').setup({
                 ensure_installed = {
@@ -27,14 +29,14 @@ return {
             })
         end,
     },
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        config = function()
-            require('mason-tool-installer').setup({
-                ensure_installed = { 'java-debug-adapter' },
-            })
-        end,
-    },
+    --{
+    --    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    --    config = function()
+    --        require('mason-tool-installer').setup({
+    --            ensure_installed = { 'java-debug-adapter' },
+    --        })
+    --    end,
+    --},
     {
         "neovim/nvim-lspconfig",
         config = function()
@@ -184,7 +186,6 @@ return {
                         vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
                     end
                 end,
-                debug = true,
                 debounce = 50,
                 debounce_text_changes = 50,
                 update_in_insert = true,
