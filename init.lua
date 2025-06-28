@@ -3,6 +3,7 @@ require("config.lazy")
 require("config.set")
 require("config.commands")
 require("config.aprenia")
+require("config.godot")
 require("config.holistic")
 require("config.edit-code-block")
 

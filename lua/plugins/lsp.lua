@@ -12,6 +12,7 @@ return {
         config = function()
             require('mason-lspconfig').setup({
                 ensure_installed = {
+                    'omnisharp',
                     'lua_ls',
                     'bashls',
                     'jdtls',
@@ -39,6 +40,9 @@ return {
     --},
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            "Hoffs/omnisharp-extended-lsp.nvim",
+        },
         config = function()
             local pathName = vim.api.nvim_buf_get_name(0)
             vim.diagnostic.config({
@@ -118,6 +122,42 @@ return {
                 capabilities = lsp_capabilities,
             })
 
+            lspconfig.omnisharp.setup({
+                capabilities = lsp_capabilities,
+                cmd = { vim.fn.stdpath("data") .. "/mason/packages/omnisharp/OmniSharp" },
+                handlers = {
+                    ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
+                    ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
+                    ["textDocument/references"] = require('omnisharp_extended').references_handler,
+                    ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
+                },
+                settings = {
+                    RoslynExtensionsOptions = {
+                        documentAnalysisTimeoutMs = 30000,
+                        enableDecompilationSupport = true,
+                    },
+                    FormattingOptions = {
+                        EnableEditorConfigSupport = false,
+                        OrganizeImports = true,
+                        NewLinesForBracesInTypes = false,
+                        NewLinesForBracesInMethods = false,
+                        NewLinesForBracesInProperties = false,
+                        NewLinesForBracesInAccessors = false,
+                        NewLinesForBracesInAnonymousMethods = false,
+                        NewLinesForBracesInControlBlocks = false,
+                        NewLinesForBracesInAnonymousTypes = false,
+                        NewLinesForBracesInObjectCollectionArrayInitializers = false,
+                        NewLinesForBracesInLambdaExpressionBody = false,
+                        NewLineForElse = false,
+                        NewLineForCatch = false,
+                        NewLineForFinally = false,
+                        NewLineForMembersInObjectInit = false,
+                        NewLineForMembersInAnonymousTypes = false,
+                        NewLineForClausesInQuery = false,
+                    }
+                }
+            })
+
             lspconfig.ts_ls.setup({
                 capabilities = lsp_capabilities,
                 on_init = function(client)
@@ -133,6 +173,10 @@ return {
             end
 
             lspconfig.gopls.setup({
+                capabilities = lsp_capabilities,
+            })
+
+            lspconfig.gdscript.setup({
                 capabilities = lsp_capabilities,
             })
 
