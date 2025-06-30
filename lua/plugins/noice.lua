@@ -1,10 +1,13 @@
 return {
     {
+        "nvim-notify",
+        version = "v3.15.0"
+    },
+    {
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            "nvim-notify",
             "rcarriga/nvim-notify",
             'stevearc/dressing.nvim',
             --"hrsh7th/nvim-cmp",
