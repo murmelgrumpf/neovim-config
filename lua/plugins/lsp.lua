@@ -12,20 +12,20 @@ return {
         config = function()
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    'omnisharp',
+                    --'omnisharp',
                     'lua_ls',
                     'bashls',
-                    'jdtls',
-                    'stylelint_lsp',
-                    'ember',
-                    'gopls',
-                    'cssls',
-                    'css_variables',
-                    'htmx',
-                    'templ',
-                    'yamlls',
-                    'biome',
-                    'eslint'
+                    --'jdtls',
+                    --'stylelint_lsp',
+                    --'ember',
+                    --'gopls',
+                    --'cssls',
+                    --'css_variables',
+                    --'htmx',
+                    --'templ',
+                    --'yamlls',
+                    --'biome',
+                    --'eslint'
                 },
             })
         end,
